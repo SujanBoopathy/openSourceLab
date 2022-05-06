@@ -12,7 +12,35 @@ regex = '^(\w|\.|\_|\-)+[@](\w|\_|\-|\.)+[.]\w{2,3}$'
 Pattern = re.compile("(0/91)?[6-9][0-9]{9}")
 
   
-
+def check_form(data):
+    
+    # for checking Name
+    if data['name'].isdigit():
+        return ('name', 'Invalid name!')
+        
+    # for checking UserName
+    if data['username'].isdigit():
+        return ('username', 'Invalid username!')
+        
+    # for checking Age
+    if data['age'] <= 0:
+        return ('age', 'Invalid age!')
+        
+    # for checking Email
+    if not (re.search(regex, data['email'])):
+        return ('email', 'Invalid email!')
+      
+    # for checking Phone Number
+    if not (Pattern.match(str(data['phone']))) or len(str(data['phone'])) != 10:
+        return ('phone', 'Invalid phone!')
+      
+ 
+        
+    # for matching Passwords
+    if data['pass'] != data['passes']:
+        return ('passes', "Please make sure your passwords match")
+  
+  
 # Taking input from the user
 data = input_group("Fill out the form:", [
     input('Username', name='username', type=TEXT,
